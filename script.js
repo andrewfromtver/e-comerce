@@ -60,25 +60,6 @@ let items = [
         'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
     }
 ]
-/* Dev check */
-function devCheck() {
-    if (document.documentElement.clientWidth < 950) {
-        document.querySelector('.navbar').style.display = `none`;
-        document.querySelector('.filter').style.display = `none`;
-        document.querySelector('.container').style.display = `none`;
-        document.querySelector('.main__form').style.display = `none`;
-        document.querySelector('.footer').style.display = `none`;
-    }
-    if (document.documentElement.clientWidth > 950) {
-        document.querySelector('.navbar').style.display = ``;
-        document.querySelector('.filter').style.display = ``;
-        document.querySelector('.container').style.display = ``;
-        document.querySelector('.main__form').style.display = ``;
-        document.querySelector('.footer').style.display = ``;
-    }
-}
-devCheck();
-window.addEventListener("resize", function() {devCheck();});
 /* Init */
 window.onload = function() {
     mainList();
@@ -88,6 +69,29 @@ let lastSeenItems = [];
 if (sessionStorage.last_seen) {
     lastSeenItems = JSON.parse(sessionStorage.last_seen); 
 }
+/* Dev check */
+function devCheck() {
+    if (document.documentElement.clientWidth < 950) {
+        document.querySelector('.navbar').style.display = `none`;
+        document.querySelector('.filter').style.display = `none`;
+        document.querySelector('.container').style.display = `none`;
+        document.querySelector('.main__form').style.display = `none`;
+        document.querySelector('.footer').style.display = `none`;
+        document.querySelector('.small__screen').style.display = ``;
+        document.body.style = `background-image: url(./img/background.gif)`;
+    }
+    if (document.documentElement.clientWidth > 950) {
+        document.querySelector('.navbar').style.display = ``;
+        document.querySelector('.filter').style.display = ``;
+        document.querySelector('.container').style.display = ``;
+        document.querySelector('.main__form').style.display = ``;
+        document.querySelector('.footer').style.display = ``;
+        document.body.style = ``;
+        document.querySelector('.small__screen').style.display = `none`;
+    }
+}
+devCheck();
+window.addEventListener("resize", function() {devCheck();});
 /* Show all available items */
 function mainList() {
     if (sessionStorage.last_seen) {
