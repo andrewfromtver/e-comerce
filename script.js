@@ -178,7 +178,7 @@ function mainListFiltered() {
         <h3 class="title">
             По вашему запросу ничего не найденно
         </h3>
-        <img class="img" src="./img/not_found.gif" alt="69store__404">
+        <img class="img" src="./img/404.gif" alt="69store__404">
         <button class="btn" onclick="mainList()">На главную страницу</button>
     `;
     }
@@ -194,7 +194,7 @@ function clearFilters() {
         <h3 class="title">
             Выберите тип, пол, ценовой диапазон и нажмите кнопку "Найти"
         </h3>
-        <img class="img" src="./img/not_found.gif" alt="69store__404">
+        <img class="img" src="./img/404.gif" alt="69store__404">
         <button class="btn" onclick="mainList()">На главную страницу</button>
     `;
 }
