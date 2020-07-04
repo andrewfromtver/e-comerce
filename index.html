@@ -1,0 +1,76 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="description" content="Онлайн магазин 69store">
+    <meta property="og:title" content="69store">
+    <meta property="og:site_name" content="Trailerpark">
+    <meta property="og:url" content="https://andrewfromtver.github.io/trailerpark-rebranding/">
+    <meta property="og:description" content="Онлайн магазин 69store">
+    <meta property="og:image" content="./img/logo.jpg">
+    <link rel="shortcut icon" href="./img/favicon.png">
+    <link rel="stylesheet" href="./style.css" type="text/css">
+    <title>69store</title>
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <a href="">
+                <img src="./img/logo.png" alt="69store__logo" height="28px" width="28px">
+            </a>
+        </div>
+        <div class="navlinks">
+            <a class="link" onclick="mainList()">
+                Каталог товаров
+            </a>
+            <a class="link" onclick="topList()">
+                Лидеры продаж
+            </a>
+            <a class="link" onclick="contacts()">
+                Обратная связь
+            </a>
+        </div>
+        <div class="navsearch">
+            <form id="searchForm">
+                <input type="text" id="search" placeholder="Поиск по каталогу">
+                <img class="search" src="./img/search.png" alt="69store__search" height="28px" width="28px" onclick="searchList()">
+            </form>
+        </div>
+        <div class="cart">
+            <img src="./img/cart.png" alt="69store__cart" height="28px" width="28px" onclick="cart()">
+        </div>
+    </div>
+</header>
+<div class="filter">
+    <select class="type" name="type" id="type">
+        <option id="all">Весь асортимент</option>
+        <option id="u">Нижнее бельё</option>
+        <option id="w">Верхняя одежда</option>
+    </select>
+    <select class="gender" name="gender" id="gender">
+        <option id="all">Весь асортимент</option>
+        <option id="m">Мужская одежда</option>
+        <option id="w">Женская одежда</option>
+    </select>
+    <div class="price__filter">
+        <input type="number" id="from" placeholder="Цена: от">
+        <a>-</a>
+        <input type="number" id="to" placeholder="Цена: до">
+    </div>
+    <div class="search__clear">
+        <button onclick="mainListFiltered()">Найти</button>
+        <button onclick="clearFilters()">Сбросить</button>
+    </div>
+</div>
+<div class="container"></div>
+<div class="main__form"></div>
+<footer>
+    <div class="footer">
+        <p>Andranik Sarkisyan 2020</p>
+    </div>
+</footer>
+<script src="./script.js"></script>
+</body>
