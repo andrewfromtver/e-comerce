@@ -2,12 +2,31 @@ body {
     margin: 0;
     font-family: sans-serif;
     background-color: #ccc;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: sans-serif;
 }
 button {
     box-shadow: 2px 2px 2px #777;
 }
 button:active {
     box-shadow: none;
+}
+.small__screen {
+    width: 50%;
+    margin: 40vh auto;
+    color: #333;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 900;
+    text-align: center;
 }
 .navbar {
     z-index: 999;
