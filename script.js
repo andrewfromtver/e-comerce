@@ -7,6 +7,7 @@ let items = [
         'img': 'https://img2.wbstatic.net/large/new/6630000/6634558-1.jpg',
         'top': false,
         'gender': 'w',
+        'sizes': 's, m, l, xxl',
         'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
     },
     {
@@ -17,6 +18,7 @@ let items = [
         'img': 'https://www.sportstyler.ru/images/thumbnails/990/1200/detailed/64/helly-hansen-64057_003-web-4.jpg',
         'top': true,
         'gender': 'm',
+        'sizes': 'l, xl, xxl',
         'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
     },
     {
@@ -27,6 +29,7 @@ let items = [
         'img': 'https://contents.mediadecathlon.com/p1645998/kb37eb36961b61d5e068685bc5530ec12/1645998_default.jpg?format=auto&quality=60&f=800x0',
         'top': false,
         'gender': 'w',
+        'sizes': 'm, l, xl, xxl',
         'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
     },
     {
@@ -37,6 +40,7 @@ let items = [
         'img': 'https://img2.wbstatic.net/large/new/6630000/6634558-1.jpg',
         'top': false,
         'gender': 'w',
+        'sizes': 's, m, l, xl, xxl',
         'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
     },
     {
@@ -47,6 +51,7 @@ let items = [
         'img': 'https://www.sportstyler.ru/images/thumbnails/990/1200/detailed/64/helly-hansen-64057_003-web-4.jpg',
         'top': true,
         'gender': 'm',
+        'sizes': 'xl, xxl',
         'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
     },
     {
@@ -57,6 +62,7 @@ let items = [
         'img': 'https://contents.mediadecathlon.com/p1645998/kb37eb36961b61d5e068685bc5530ec12/1645998_default.jpg?format=auto&quality=60&f=800x0',
         'top': false,
         'gender': 'w',
+        'sizes': 'xxl',
         'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
     }
 ]
@@ -94,6 +100,27 @@ devCheck();
 window.addEventListener("resize", function() {devCheck();});
 /* Show all available items */
 function mainList() {
+    document.querySelector('.filter').innerHTML = `
+        <select class="type" name="type" id="type">
+            <option id="all">Весь асортимент</option>
+            <option id="u">Нижнее бельё</option>
+            <option id="w">Верхняя одежда</option>
+        </select>
+        <select class="gender" name="gender" id="gender">
+            <option id="all">Весь асортимент</option>
+            <option id="m">Мужская одежда</option>
+            <option id="w">Женская одежда</option>
+        </select>
+        <div class="price__filter">
+            <input type="number" id="from" placeholder="Цена: от">
+            <a>-</a>
+            <input type="number" id="to" placeholder="Цена: до">
+        </div>
+        <div class="search__clear">
+            <button onclick="mainListFiltered()">Найти</button>
+            <button onclick="clearFilters()">Сбросить</button>
+        </div>
+    `;
     if (sessionStorage.last_seen) {
         lastSeenItems = JSON.parse(sessionStorage.last_seen); 
     }
@@ -223,6 +250,7 @@ function clearFilters() {
 }
 /* Show only top items */
 function topList() {
+    document.querySelector('.filter').innerHTML = `<div class="search__clear"><div>`;
     document.querySelector('.main__form').innerHTML = ``;
     var topItems = items.filter(filterByTop);
     document.querySelector('.container').innerHTML = ``;
@@ -317,7 +345,7 @@ function show(id) {
         <h3 class="item__title">${shownItem[0].name}</h3>
         <button class="btn__back" onclick="mainList()"><</button>
         <div class="item__card">
-            <div class="cart item__cart" onclick="addToCart()">
+            <div class="cart item__cart" id="${id}" onclick="addToCart(this.id)">
                 <img src="./img/add_to_cart.png" alt="69store__add__to__cart" height="28px" width="28px">
             </div>
             <p class="item__info">${selectedItemType} | ${selectedItemGender}</p>
@@ -373,17 +401,92 @@ function lastSeen() {
 }
 /* Cart */
 function cart() {
+    document.querySelector('.filter').innerHTML = `<div class="search__clear"><div>`;
+    let cartItems = [];
+    let cartTable = ``;
+    let count = 0;
+    if (sessionStorage.cart_items) {
+        cartItems = JSON.parse(sessionStorage.cart_items);
+    }
     document.querySelector('.main__form').innerHTML = ``;
-    document.querySelector('.container').innerHTML = `
-    <h3 class="title">
-        Ваша корзина пока пуста, выберите что-нибудь и возвращайтесь
-    </h3>
-    <img class="img" src="./img/404.gif" alt="69store__404">
-    <button class="btn" onclick="mainList()">Назад к покупкам</button>
+    if (cartItems.length == 0) {
+        document.querySelector('.container').innerHTML = `
+        <h3 class="title">
+            Ваша корзина пока пуста, выберите что-нибудь и возвращайтесь
+        </h3>
+        <img class="img" src="./img/404.gif" alt="69store__404">
+        <button class="btn" onclick="mainList()">Назад к покупкам</button>
+        `;
+    } else {
+        cartTable += `
+            <table class="cart__table">
+        `;
+        cartItems.forEach(function(item) {
+            cartTable +=`
+                    <tr>
+                        <td>${cartItems[count].split('|')[0]}</td>
+                        <td>${cartItems[count].split('|')[1]}</td>
+                    </tr>
+            `;
+            count +=1;
+        })
+        cartTable +=`
+            </table>
+            <button class="btn" onclick="clearCart()">Отчистить корзину</button>
+        `;
+        document.querySelector('.container').innerHTML = cartTable;
+    }
+}
+document.querySelector('.add__to__cart__settings').style.display = `none`;
+function addToCart(id) {
+    function filterById(item) {
+        if (isNumber(item.id) && item.id == id) {
+            return true;
+        }
+        return false;
+    }
+    var cartItem = items.filter(filterById);
+    document.querySelector('.add__to__cart__settings').style.display = ``;
+
+    let inner = `
+        <div>
+            <h3 class="title">
+                ${cartItem[0].name}
+            </h3>
+            <p class="sizes__title">
+                Выберите размер:
+            </p>
+            <div class="sizes__table">
+        `;
+    cartItem[0].sizes.split(',').forEach(function(size) {
+        inner += `
+        <a onclick="addToCartCompleate(${id}, '${size}')">${size}</a>`
+    })
+    inner += `
+            </div>
+            <button class="btn" onclick="addToCartCompleate()">Назад</button>
+        </div>
     `;
+    document.querySelector('.add__to__cart__settings').innerHTML = inner;
+}
+function addToCartCompleate(id, size) {
+    document.querySelector('.add__to__cart__settings').style.display = `none`;
+    let cartItems = [];
+    if (sessionStorage.cart_items) {
+        cartItems = JSON.parse(sessionStorage.cart_items);
+    }
+    cartItems.push(`${id}|${size}`);
+    sessionStorage.setItem('cart_items', JSON.stringify(cartItems));
+}
+function clearCart() {
+    if (sessionStorage.cart_items) {
+        sessionStorage.setItem('cart_items', []);
+    }
+    cart();
 }
 /* Contacts */
 function contacts() {
+    document.querySelector('.filter').innerHTML = `<div class="search__clear"><div>`;
     document.querySelector('.main__form').innerHTML = ``;
     document.querySelector('.container').innerHTML = `
     <h3 class="title">
