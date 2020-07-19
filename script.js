@@ -1,71 +1,58 @@
-let items = [
-    {
-        'id': 1,
-        'type': 'u',
-        'name': 'Носки 1',
-        'price': 111,
-        'img': 'https://img2.wbstatic.net/large/new/6630000/6634558-1.jpg',
-        'top': false,
-        'gender': 'w',
-        'sizes': 's, m, l, xxl',
-        'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    },
-    {
-        'id': 2,
-        'type': 'w',
-        'name': 'Куртка 2',
-        'price': 222,
-        'img': 'https://www.sportstyler.ru/images/thumbnails/990/1200/detailed/64/helly-hansen-64057_003-web-4.jpg',
-        'top': true,
-        'gender': 'm',
-        'sizes': 'l, xl, xxl',
-        'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    },
-    {
-        'id': 3,
-        'type': 'w',
-        'name': 'Куртка 3',
-        'price': 333,
-        'img': 'https://contents.mediadecathlon.com/p1645998/kb37eb36961b61d5e068685bc5530ec12/1645998_default.jpg?format=auto&quality=60&f=800x0',
-        'top': false,
-        'gender': 'w',
-        'sizes': 'm, l, xl, xxl',
-        'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    },
-    {
-        'id': 4,
-        'type': 'u',
-        'name': 'Носки 4',
-        'price': 444,
-        'img': 'https://img2.wbstatic.net/large/new/6630000/6634558-1.jpg',
-        'top': false,
-        'gender': 'w',
-        'sizes': 's, m, l, xl, xxl',
-        'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    },
-    {
-        'id': 5,
-        'type': 'w',
-        'name': 'Куртка 5',
-        'price': 555,
-        'img': 'https://www.sportstyler.ru/images/thumbnails/990/1200/detailed/64/helly-hansen-64057_003-web-4.jpg',
-        'top': true,
-        'gender': 'm',
-        'sizes': 'xl, xxl',
-        'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    },
-    {
-        'id': 6,
-        'type': 'w',
-        'name': 'Куртка 6',
-        'price': 666,
-        'img': 'https://contents.mediadecathlon.com/p1645998/kb37eb36961b61d5e068685bc5530ec12/1645998_default.jpg?format=auto&quality=60&f=800x0',
-        'top': false,
-        'gender': 'w',
-        'sizes': 'xxl',
-        'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
+let itemsTest = "";
+let items = [];
+fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRFodqaGcZZ4xWcizA/1/public/full?alt=json')
+.then(function(value){
+    if(value.status !== 200){
+        return Promise.reject(new Error('Ошибка'));
     }
-]
+        return value.json();
+})
+.then(function(output){
+    itemsTest += "["
+    for (let index = 0; index < output.feed.entry.length; index++) {
+        if (output.feed.entry[index].content.$t == "id") {
+            itemsTest += "{";
+            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
+        }
+        if (output.feed.entry[index].content.$t == "type") {
+            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+        }
+        if (output.feed.entry[index].content.$t == "name") {
+            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+        }
+        if (output.feed.entry[index].content.$t == "price") {
+            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
+        }
+        if (output.feed.entry[index].content.$t == "img") {
+            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+        }
+        if (output.feed.entry[index].content.$t == "top") {
+            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
+        }
+        if (output.feed.entry[index].content.$t == "gender") {
+            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+        }
+        if (output.feed.entry[index].content.$t == "sizes") {
+            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+        }
+        if (output.feed.entry[index].content.$t == "description") {
+            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+        }
+        if (output.feed.entry.length - 1 > index && output.feed.entry[index + 1].content.$t != "id") {
+            itemsTest += ",";
+        }
+        if (output.feed.entry[index-1].content.$t == "description" && index + 1 < output.feed.entry.length) {
+            itemsTest += "},";
+        }
+        if (index + 1 == output.feed.entry.length) {
+            itemsTest += "}";
+        }
+    }
+    itemsTest += "]"
+    items = JSON.parse(itemsTest);
+    mainList();
+})
+
 /* Init */
 window.onload = function() {
     mainList();
