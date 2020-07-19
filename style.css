@@ -121,7 +121,7 @@ button:active {
     max-width: 963px;
     margin: 0 auto;
 }
-.type, .gender {
+.select1, .select2 {
     margin: 15.5px;
     height: 35px;
     width: 15%;
