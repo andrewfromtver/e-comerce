@@ -1,5 +1,5 @@
 # e-comerce
 
-Simple e-comerce front-end preset (clear JS, g-sheet JSON api)
+Simple e-comerce front-end preset (clear JS, g-sheets JSON api)
 
-use g-sheet as mini CMS
+use g-sheets as mini CMS
