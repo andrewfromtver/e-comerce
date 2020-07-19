@@ -1,66 +1,97 @@
+/* Fetch items from g-sheets */
 let itemsTest = "";
 let items = [];
 fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRFodqaGcZZ4xWcizA/1/public/full?alt=json')
-.then(function(value){
-    if(value.status !== 200){
-        return Promise.reject(new Error('Ошибка'));
-    }
-        return value.json();
-})
-.then(function(output){
-    itemsTest += "["
-    for (let index = 0; index < output.feed.entry.length; index++) {
-        if (output.feed.entry[index].content.$t == "id") {
-            itemsTest += "{";
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
+    .then(function(value){
+        if(value.status !== 200){
+            return Promise.reject(new Error('Ошибка'));
         }
-        if (output.feed.entry[index].content.$t == "type") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            return value.json();
+    })
+    .then(function(output){
+        itemsTest += "["
+        for (let index = 0; index < output.feed.entry.length; index++) {
+            if (output.feed.entry[index].content.$t == "id") {
+                itemsTest += "{";
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
+            }
+            if (output.feed.entry[index].content.$t == "type") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            }
+            if (output.feed.entry[index].content.$t == "name") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            }
+            if (output.feed.entry[index].content.$t == "price") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
+            }
+            if (output.feed.entry[index].content.$t == "img") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            }
+            if (output.feed.entry[index].content.$t == "img__add__1") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            }
+            if (output.feed.entry[index].content.$t == "img__add__2") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            }
+            if (output.feed.entry[index].content.$t == "img__add__3") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            }
+            if (output.feed.entry[index].content.$t == "top") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
+            }
+            if (output.feed.entry[index].content.$t == "gender") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            }
+            if (output.feed.entry[index].content.$t == "sizes") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            }
+            if (output.feed.entry[index].content.$t == "description") {
+                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            }
+            if (output.feed.entry.length - 1 > index && output.feed.entry[index + 1].content.$t != "id") {
+                itemsTest += ",";
+            }
+            if (output.feed.entry[index-1].content.$t == "description" && index + 1 < output.feed.entry.length) {
+                itemsTest += "},";
+            }
+            if (index + 1 == output.feed.entry.length) {
+                itemsTest += "}";
+            }
         }
-        if (output.feed.entry[index].content.$t == "name") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+        itemsTest += "]"
+        items = JSON.parse(itemsTest);
+        mainList();
+    })
+/* Fetch select__1 from g-sheets */
+let select1 = [];
+fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRFodqaGcZZ4xWcizA/2/public/full?alt=json')
+    .then(function(value){
+        if(value.status !== 200){
+            return Promise.reject(new Error('Ошибка'));
         }
-        if (output.feed.entry[index].content.$t == "price") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
+            return value.json();
+    })
+    .then(function(output){
+        output.feed.entry.forEach(function(item) {
+            select1.push(item.content.$t);
+        })
+        mainList();
+    })
+/* Fetch select__2 from g-sheets */
+let select2 = [];
+fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRFodqaGcZZ4xWcizA/3/public/full?alt=json')
+    .then(function(value){
+        if(value.status !== 200){
+            return Promise.reject(new Error('Ошибка'));
         }
-        if (output.feed.entry[index].content.$t == "img") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-        }
-        if (output.feed.entry[index].content.$t == "img__add__1") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-        }
-        if (output.feed.entry[index].content.$t == "img__add__2") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-        }
-        if (output.feed.entry[index].content.$t == "img__add__3") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-        }
-        if (output.feed.entry[index].content.$t == "top") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
-        }
-        if (output.feed.entry[index].content.$t == "gender") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-        }
-        if (output.feed.entry[index].content.$t == "sizes") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-        }
-        if (output.feed.entry[index].content.$t == "description") {
-            itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-        }
-        if (output.feed.entry.length - 1 > index && output.feed.entry[index + 1].content.$t != "id") {
-            itemsTest += ",";
-        }
-        if (output.feed.entry[index-1].content.$t == "description" && index + 1 < output.feed.entry.length) {
-            itemsTest += "},";
-        }
-        if (index + 1 == output.feed.entry.length) {
-            itemsTest += "}";
-        }
-    }
-    itemsTest += "]"
-    items = JSON.parse(itemsTest);
-    mainList();
-})
+            return value.json();
+    })
+    .then(function(output){
+        output.feed.entry.forEach(function(item) {
+            select2.push(item.content.$t);
+        })
+        mainList();
+    })
 
 /* Init */
 window.onload = function() {
@@ -96,16 +127,22 @@ devCheck();
 window.addEventListener("resize", function() {devCheck();});
 /* Show all available items */
 function mainList() {
-    document.querySelector('.filter').innerHTML = `
-        <select class="type" name="type" id="type">
-            <option id="all">Весь асортимент</option>
-            <option id="u">Нижнее бельё</option>
-            <option id="w">Верхняя одежда</option>
+    inner = `
+        <select class="select1" name="select1" id="select1">
+    `;
+    for (let index = 0; index < select1.length; index++) {
+        inner += `<option id="${select1[index + 1]}">${select1[index]}</option>`;
+        ++index;
+    }
+    inner += `
         </select>
-        <select class="gender" name="gender" id="gender">
-            <option id="all">Весь асортимент</option>
-            <option id="m">Мужская одежда</option>
-            <option id="w">Женская одежда</option>
+        <select class="select2" name="select2" id="select2">
+    `;
+    for (let index = 0; index < select2.length; index++) {
+        inner += `<option id="${select2[index + 1]}">${select2[index]}</option>`;
+        ++index;
+    }
+    inner += `
         </select>
         <div class="price__filter">
             <input type="number" id="from" placeholder="Цена: от">
@@ -117,6 +154,7 @@ function mainList() {
             <button onclick="clearFilters()">Сбросить</button>
         </div>
     `;
+    document.querySelector('.filter').innerHTML = inner;
     if (sessionStorage.last_seen) {
         lastSeenItems = JSON.parse(sessionStorage.last_seen); 
     }
@@ -156,7 +194,7 @@ function filterByName(item) {
     return false;
 }
 function filterByType(item) {
-    let type = document.querySelector('.type').selectedOptions[0].id;
+    let type = document.querySelector('.select1').selectedOptions[0].id;
     let re = new RegExp('.*' + type + '.*');
     if (item.type.toLowerCase().match(re)) {
         return true;
@@ -164,7 +202,7 @@ function filterByType(item) {
     return false;
 }
 function filterByGender(item) {
-    let gender = document.querySelector('.gender').selectedOptions[0].id;
+    let gender = document.querySelector('.select2').selectedOptions[0].id;
     let re = new RegExp('.*' + gender + '.*');
     if (item.gender.toLowerCase().match(re)) {
         return true;
@@ -185,8 +223,8 @@ function mainListFiltered() {
     document.querySelector('.main__form').innerHTML = ``;
     document.querySelector('#from').style = ``;
     document.querySelector('#to').style = ``;
-    let gender = document.querySelector('.gender').selectedOptions[0].id;
-    let type = document.querySelector('.type').selectedOptions[0].id;
+    let gender = document.querySelector('.select2').selectedOptions[0].id;
+    let type = document.querySelector('.select1').selectedOptions[0].id;
     var filteredItems = {};
     if (document.querySelector('#from').value == ``) {
         document.querySelector('#from').style = `border-color: tomato`;
