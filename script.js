@@ -492,7 +492,7 @@ function addToCart(id) {
             </p>
             <div class="sizes__table">
         `;
-    cartItem[0].sizes.split(',').forEach(function(size) {
+    cartItem[0].add__prop.split(',').forEach(function(size) {
         inner += `
         <a onclick="addToCartCompleate(${id}, '${size}')">${size}</a>`
     })
