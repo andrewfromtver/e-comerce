@@ -15,7 +15,7 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
                 itemsTest += "{";
                 itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
             }
-            if (output.feed.entry[index].content.$t == "type") {
+            if (output.feed.entry[index].content.$t == "prop__1") {
                 itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
             }
             if (output.feed.entry[index].content.$t == "name") {
@@ -39,10 +39,10 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
             if (output.feed.entry[index].content.$t == "top") {
                 itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
             }
-            if (output.feed.entry[index].content.$t == "gender") {
+            if (output.feed.entry[index].content.$t == "prop__2") {
                 itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
             }
-            if (output.feed.entry[index].content.$t == "sizes") {
+            if (output.feed.entry[index].content.$t == "add__prop") {
                 itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
             }
             if (output.feed.entry[index].content.$t == "description") {
