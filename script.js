@@ -354,16 +354,16 @@ function show(id) {
     var shownItem = items.filter(filterById);
     let selectedItemType = "";
     let selectedItemGender = "";
-    if (shownItem[0].type == "w") {
+    if (shownItem[0].prop__1 == "w") {
         selectedItemType = "Верхняя одежда";
     }
-    if (shownItem[0].gender == "m") {
+    if (shownItem[0].prop__2 == "m") {
         selectedItemGender = "Мужская одежда";
     }
-    if (shownItem[0].type == "u") {
+    if (shownItem[0].prop__1 == "u") {
         selectedItemType = "Нижнее бельё";
     }
-    if (shownItem[0].gender == "w") {
+    if (shownItem[0].prop__2 == "w") {
         selectedItemGender = "Женская одежда";
     }
     
