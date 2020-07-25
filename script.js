@@ -360,7 +360,7 @@ function show(id) {
             </p>
             <p class="item__description">${shownItem[0].description}</p>
             <div class="item__more__info">
-                
+                <h3>${shownItem[0].add__prop}</h3>
             </div>
             <h3 class="item__price">${shownItem[0].price} руб.</h3>
         </div>
