@@ -1,6 +1,9 @@
 /* Fetch items from g-sheets */
 let itemsTest = "";
 let items = [];
+let itemsListLoaded = false,
+    select1loaded = false,
+    select2loaded = false;
 fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRFodqaGcZZ4xWcizA/1/public/full?alt=json')
     .then(function(value){
         if(value.status !== 200){
@@ -60,7 +63,7 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
         }
         itemsTest += "]";
         items = JSON.parse(itemsTest);
-        mainList();
+        itemsListLoaded = true;
     });
 /* Fetch select__1 from g-sheets */
 let select1 = [];
@@ -75,7 +78,7 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
         output.feed.entry.forEach(function(item) {
             select1.push(item.content.$t);
         });
-        mainList();
+        select1loaded = true;
     });
 /* Fetch select__2 from g-sheets */
 let select2 = [];
@@ -90,11 +93,11 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
         output.feed.entry.forEach(function(item) {
             select2.push(item.content.$t);
         });
-        mainList();
+        select2loaded = true;
     });
 /* Init */
 window.onload = function() {
-    mainList();
+    setTimeout(mainList, 3000);
     document.querySelector('#searchForm').addEventListener('submit', searchList);
 };
 let lastSeenItems = [];
@@ -170,7 +173,7 @@ function mainList() {
                 </div>
             </div>
         `; 
-    })
+    });
 }
 /* For filter function */
 function isNumber(obj) {
@@ -283,7 +286,7 @@ function topList() {
                 </div>
             </div>
         `; 
-    })
+    });
 }
 /* Search items by name */
 function searchList() {
@@ -308,10 +311,10 @@ function searchList() {
                     </div>
                 </div>
             `; 
-        })
+        });
     }
     else {
-        document.querySelector('#search').style = `border-color: tomato;`
+        document.querySelector('#search').style = `border-color: tomato;`;
     }
     if (!searchItems || searchItems.length === 0) {
         document.querySelector('.container').innerHTML = `
@@ -334,20 +337,7 @@ function show(id) {
 
     }
     let shownItem = items.filter(filterById);
-    let selectedItemType = "";
-    let selectedItemGender = "";
-    if (shownItem[0].prop__1 === "w") {
-        selectedItemType = "Верхняя одежда";
-    }
-    if (shownItem[0].prop__2 === "m") {
-        selectedItemGender = "Мужская одежда";
-    }
-    if (shownItem[0].prop__1 === "u") {
-        selectedItemType = "Нижнее бельё";
-    }
-    if (shownItem[0].prop__2 === "w") {
-        selectedItemGender = "Женская одежда";
-    }
+    
     document.querySelector('.container').innerHTML = `
         <div class="item">
             <img class="main__img" onclick="view(this)" src="${shownItem[0].img || './img/noimage.png'}" alt="69store__item">
@@ -363,7 +353,11 @@ function show(id) {
             <div class="cart item__cart" id="${id}" onclick="addToCart(this.id)">
                 <img src="./img/add_to_cart.png" alt="69store__add__to__cart" height="28px" width="28px">
             </div>
-            <p class="item__info">${selectedItemType} | ${selectedItemGender}</p>
+            <p class="item__info">
+                ${select1.slice(select1.indexOf(shownItem[0].prop__1)-1, select1.indexOf(shownItem[0].prop__1))} 
+                | 
+                ${select2.slice(select2.indexOf(shownItem[0].prop__2)-1, select2.indexOf(shownItem[0].prop__2))}
+            </p>
             <p class="item__description">${shownItem[0].description}</p>
             <div class="item__more__info">
                 
@@ -409,7 +403,7 @@ function lastSeen() {
                 <h4>${elem[0].name}</h4>
             </div>
             `;
-            })
+            });
         }
 }
 /* Cart */
@@ -469,7 +463,7 @@ function addToCart(id) {
         `;
     cartItem[0].add__prop.split(',').forEach(function(size) {
         inner += `
-        <a onclick="addToCartComplete(${id}, '${size}')">${size}</a>`
+        <a onclick="addToCartComplete(${id}, '${size}')">${size}</a>`;
     });
     inner += `
             </div>
@@ -492,16 +486,4 @@ function clearCart() {
         sessionStorage.setItem('cart_items', []);
     }
     cart();
-}
-/* Contacts */
-function contacts() {
-    document.querySelector('.filter').innerHTML = `<div class="search__clear"><div>`;
-    document.querySelector('.main__form').innerHTML = ``;
-    document.querySelector('.container').innerHTML = `
-    <h3 class="title">
-        Оставьте отзыв о работе нашего магазина
-    </h3>
-    <textarea name="feedback" class="feedback"></textarea>
-    <button class="btn" onclick="sendRecuest()">Отправить</button>
-`;
 }
