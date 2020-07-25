@@ -22,19 +22,21 @@
                 <img src="./img/logo.png" alt="69store__logo" height="28px" width="28px">
             </a>
         </div>
-        <div class="navlinks">
-            <a class="link" onclick="mainList()">
-                Каталог товаров
-            </a>
-            <a class="link" onclick="topList()">
-                Лидеры продаж
-            </a>
-        </div>
-        <div class="navsearch">
-            <form id="searchForm">
-                <input type="text" id="search" placeholder="Поиск по каталогу">
-                <img class="search" src="./img/search.png" alt="69store__search" height="28px" width="28px" onclick="searchList()">
-            </form>
+        <div class="navcontainer">
+            <div class="navlinks">
+                <a class="link" onclick="mainList()">
+                    Каталог товаров
+                </a>
+                <a class="link" onclick="topList()">
+                    Лидеры продаж
+                </a>
+            </div>
+            <div class="navsearch">
+                <form id="searchForm">
+                    <label for="search"></label><input type="text" id="search" placeholder="Поиск по каталогу">
+                    <img class="search" src="./img/search.png" alt="69store__search" height="28px" width="28px" onclick="searchList()">
+                </form>
+            </div>
         </div>
         <div class="cart">
             <img src="./img/cart.png" alt="69store__cart" height="28px" width="28px" onclick="cart()">
