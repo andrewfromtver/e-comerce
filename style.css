@@ -9,7 +9,6 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    font-family: sans-serif;
 }
 button {
     box-shadow: 2px 2px 2px #777;
@@ -47,29 +46,27 @@ button:active {
     cursor: pointer;
 }
 .logo > a > img {
-    margin-top: 1.5px;
+    margin-top: 2px;
     border: 2px solid tomato;
     border-radius: 5px;
 }
 .logo > a > img:active {
     height: 24px;
     width: 24px;
-    margin: 2.75px;
+    margin: 3px;
 }
 .navlinks {
-    width: -moz-available;
-    width: -webkit-fill-available;
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin: 0 5vw;
 }
 .link {
     text-align: center;
-    width: 150px;
+    width: 137px;
+    margin-right: 34px;
     padding: 9px 0 0 0;
     font-size: 14px;
+    background-color: #555555;
 }
 .link:hover {
     background-color: tomato;
@@ -81,16 +78,24 @@ button:active {
     padding: 10px 0 0 0;
 }
 .navsearch {
-    width: 40%;
+    width: 278px;
+
+}
+::placeholder {
+    color: #aaa;
+    font-size: 14px;
 }
 .navsearch > form > input {
     width: 100%;
     height: 100%;
     padding: 0 30px 0 10px;
+    background-color: #555555;
+    border: none;
+    color: #fff;
 }
 .navsearch > form > input:focus {
-    border: 2px solid #ccc;
-    border-radius: 5px;
+    border: none;
+    outline: none;
 }
 .navsearch > form > img {
     position: absolute;
@@ -99,22 +104,26 @@ button:active {
 .navsearch > form > img:active {
     height: 24px;
     width: 24px;
-    margin: 5.25px -29.75px;
+    margin: 5px -30px;
+}
+.navcontainer {
+    width: 930px;
+    display: flex;
+    justify-content: space-between;
 }
 .cart > img {
     background-color: #fff;
-    margin-top: 1.5px;
+    margin-top: 2px;
     border: 2px solid tomato;
     border-radius: 5px;
 }
 .cart > img:active {
     height: 24px;
     width: 24px;
-    margin: 2.75px;
+    margin: 3px;
 }
 .filter {
     width: -moz-available;
-    width: -webkit-fill-available;
     display: flex;
     flex-direction: row;
     padding-top: 35px;
@@ -122,16 +131,15 @@ button:active {
     margin: 0 auto;
 }
 .select1, .select2 {
-    margin: 15.5px;
+    margin: 16px;
     height: 35px;
     width: 15%;
     padding: 0;
 }
 .price__filter, .search__clear {
     width: 30%;
-    margin: 15.5px;
+    margin: 16px;
     height: 35px;
-    width: 30%;
     padding: 0;
 }
 .price__filter > input {
@@ -144,6 +152,7 @@ button:active {
 }
 .container, .last__seen {
     width: 95vw;
+    border-radius: 2px;
     max-width: 900px;
     background-color: #fff;
     margin: 0 auto;
@@ -217,6 +226,7 @@ button:active {
     margin: 0 15px;
     border-radius: 5px;
     overflow: auto;
+    text-align: center;
 }
 .feedback {
     width: 100%;
@@ -303,12 +313,11 @@ button:active {
     z-index: 99;
 }
 .add__to__cart__settings > div {
-    margin: 0 auto;
+    margin: 30vh auto 0 auto;
     height: 40vh;
     width: 450px;
     min-height: 300px;
     z-index: 1000;
-    margin-top: 30vh;
     background-color: #fff;
     border: 1px solid #777;
     border-radius: 5px;
@@ -329,7 +338,7 @@ button:active {
     justify-content: center;
 }
 .sizes__table > a {
-    height: 50px;
+    height: 28px;
     width: 50px;
     background-color: #eee;
     margin: 10px;
@@ -343,7 +352,7 @@ button:active {
 }
 .sizes__table > a:active {
     border: 4px solid #fff;
-    height: 42px;
+    height: 20px;
     width: 42px;
 }
 .cart__table {
