@@ -11,7 +11,7 @@ body {
     background-size: cover;
 }
 button {
-    box-shadow: 2px 2px 2px #777;
+    box-shadow: 2px 2px 2px #333;
 }
 button:active {
     box-shadow: none;
