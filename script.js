@@ -1,9 +1,7 @@
 /* Fetch items from g-sheets */
 let itemsTest = "";
 let items = [];
-let itemsListLoaded = false,
-    select1loaded = false,
-    select2loaded = false;
+
 fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRFodqaGcZZ4xWcizA/1/public/full?alt=json')
     .then(function(value){
         if(value.status !== 200){
@@ -12,50 +10,57 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
             return value.json();
     })
     .then(function(output){
-        itemsTest += "[";
+        let counter = 12;
+        let row = 0;
+        itemsTest += "[{";
         for (let index = 0; index < output.feed.entry.length; index++) {
-            if (output.feed.entry[index].content.$t === "id") {
-                itemsTest += "{";
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
+            if (output.feed.entry[index].content.$t === "id" && index < counter) {
+                itemsTest += `"${output.feed.entry[0].content.$t}"` + ":" + output.feed.entry[counter].content.$t + ", ";
             }
-            if (output.feed.entry[index].content.$t === "prop__1") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
+            if (output.feed.entry[index - counter] && index + 12 <= output.feed.entry.length) {
+                if (output.feed.entry[index - counter].content.$t === "id") {
+                    itemsTest += `"${output.feed.entry[0].content.$t}"` + ":" + output.feed.entry[counter].content.$t + ", ";
+                }
             }
-            if (output.feed.entry[index].content.$t === "name") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-            }
-            if (output.feed.entry[index].content.$t === "price") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
-            }
-            if (output.feed.entry[index].content.$t === "img") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-            }
-            if (output.feed.entry[index].content.$t === "img__add__1") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-            }
-            if (output.feed.entry[index].content.$t === "img__add__2") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-            }
-            if (output.feed.entry[index].content.$t === "img__add__3") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-            }
-            if (output.feed.entry[index].content.$t === "top") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + output.feed.entry[++index].content.$t;
-            }
-            if (output.feed.entry[index].content.$t === "prop__2") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-            }
-            if (output.feed.entry[index].content.$t === "add__prop") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-            }
-            if (output.feed.entry[index].content.$t === "description") {
-                itemsTest += `"${output.feed.entry[index].content.$t}"` + ":" + `"${output.feed.entry[++index].content.$t}"`;
-            }
-            if (output.feed.entry.length - 1 > index && output.feed.entry[index + 1].content.$t !== "id") {
-                itemsTest += ",";
-            }
-            if (output.feed.entry[index-1].content.$t === "description" && index + 1 < output.feed.entry.length) {
-                itemsTest += "},";
+            if (index > counter) {
+
+                if (output.feed.entry[index - counter + row].content.$t === "prop__1") {
+                    itemsTest += `"${output.feed.entry[1].content.$t}"` + ":" + `"${output.feed.entry[1 + counter].content.$t}"` + ", ";
+                }
+                if (output.feed.entry[index - counter + row].content.$t === "prop__2") {
+                    itemsTest += `"${output.feed.entry[2].content.$t}"` + ":" + `"${output.feed.entry[2 + counter].content.$t}"` + ", ";
+                }
+                if (output.feed.entry[index - counter].content.$t === "add__prop") {
+                    itemsTest += `"${output.feed.entry[3].content.$t}"` + ":" + `"${output.feed.entry[3 + counter].content.$t}"` + ", ";
+                }
+                if (output.feed.entry[index - counter].content.$t === "name") {
+                    itemsTest += `"${output.feed.entry[4].content.$t}"` + ":" + `"${output.feed.entry[4 + counter].content.$t}"` + ", ";
+                }
+                if (output.feed.entry[index - counter].content.$t === "price") {
+                    itemsTest += `"${output.feed.entry[5].content.$t}"` + ":" + output.feed.entry[5 + counter].content.$t + ", ";
+                }
+                if (output.feed.entry[index - counter].content.$t === "img") {
+                    itemsTest += `"${output.feed.entry[6].content.$t}"` + ":" + `"${output.feed.entry[6 + counter].content.$t}"` + ", ";
+                }
+                if (output.feed.entry[index - counter].content.$t === "img__add__1") {
+                    itemsTest += `"${output.feed.entry[7].content.$t}"` + ":" + `"${output.feed.entry[7 + counter].content.$t}"` + ", ";
+                }
+                if (output.feed.entry[index - counter].content.$t === "img__add__2") {
+                    itemsTest += `"${output.feed.entry[8].content.$t}"` + ":" + `"${output.feed.entry[8 + counter].content.$t}"` + ", ";
+                }
+                if (output.feed.entry[index - counter].content.$t === "img__add__3") {
+                    itemsTest += `"${output.feed.entry[9].content.$t}"` + ":" + `"${output.feed.entry[9 + counter].content.$t}"` + ", ";
+                }
+                if (output.feed.entry[index - counter].content.$t === "top") {
+                    itemsTest += `"${output.feed.entry[10].content.$t}"` + ":" + output.feed.entry[10 + counter].content.$t + ", ";
+                }
+                if (output.feed.entry[index - counter].content.$t === "description") {
+                    itemsTest += `"${output.feed.entry[11].content.$t}"` + ":" + `"${output.feed.entry[11 + counter].content.$t}"`;
+                }
+                if (output.feed.entry[index - counter].content.$t === "description" && index + 1 < output.feed.entry.length) {
+                    itemsTest += "}, {";
+                    counter += 12;
+                }
             }
             if (index + 1 === output.feed.entry.length) {
                 itemsTest += "}";
@@ -64,6 +69,7 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
         itemsTest += "]";
         items = JSON.parse(itemsTest);
         itemsListLoaded = true;
+        mainList();
     });
 /* Fetch select__1 from g-sheets */
 let select1 = [];
@@ -79,6 +85,7 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
             select1.push(item.content.$t);
         });
         select1loaded = true;
+        mainList();
     });
 /* Fetch select__2 from g-sheets */
 let select2 = [];
@@ -94,10 +101,10 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
             select2.push(item.content.$t);
         });
         select2loaded = true;
+        mainList();
     });
 /* Init */
 window.onload = function() {
-    setTimeout(mainList, 3000);
     document.querySelector('#searchForm').addEventListener('submit', searchList);
 };
 let lastSeenItems = [];
@@ -298,7 +305,7 @@ function searchList() {
     document.querySelector('#search').style = ``;
     let searchString = document.querySelector('#search').value;
     if (searchString.length > 3) {
-        var searchItems = items.filter(filterByName);
+        let searchItems = items.filter(filterByName);
         document.querySelector('.container').innerHTML = ``;
         searchItems.forEach(function (item){
             document.querySelector('.container').innerHTML += `
@@ -394,7 +401,6 @@ function lastSeen() {
         lastSeenItems.forEach(function(lastSeenId) {
             function filterById(item) {
                 return !!(isNumber(item.id) && item.id === lastSeenId);
-
             }
             let elem = items.filter(filterById);
             document.querySelector('.last__seen').innerHTML += `
