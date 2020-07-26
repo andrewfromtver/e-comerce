@@ -293,7 +293,7 @@ button:active {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: #555;
+    background-color: #777c;
     display: flex;
     justify-content: center;
 }
@@ -311,6 +311,7 @@ button:active {
     width: 100%;
     margin: 0 auto;
     z-index: 99;
+    background-color: #777c;
 }
 .add__to__cart__settings > div {
     margin: 30vh auto 0 auto;
