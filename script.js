@@ -121,6 +121,7 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
         document.querySelector('.logo__left').src = customImages[3];
         document.querySelector('.search').src = customImages[5];
         document.querySelector('.logo__right').src = customImages[7];
+        document.querySelector('.footer').innerText = customImages[13];
     });
 /* Init */
 document.cookie = "SameSite=Strict; secure";
