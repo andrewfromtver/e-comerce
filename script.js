@@ -147,7 +147,7 @@ function devCheck() {
         document.querySelector('.container').style.display = ``;
         document.querySelector('.main__form').style.display = ``;
         document.querySelector('.footer').style.display = ``;
-        document.body.style = ``;
+        document.body.style = `background-image: url(${customImages[1]})`;
         document.querySelector('.small__screen').style.display = `none`;
     }
 }
