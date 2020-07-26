@@ -322,41 +322,46 @@ function topList() {
 /* Search items by name */
 let searchItems = [];
 function searchList() {
-    document.querySelector('.search').style = `background-color: none;`;
-    if (sessionStorage.last_seen) {
-        lastSeenItems = JSON.parse(sessionStorage.last_seen); 
-    }
-    event.preventDefault();
-    document.querySelector('.main__form').innerHTML = ``;
-    document.querySelector('#searchString').style = ``;
-    let searchString = document.querySelector('#searchString').value;
-    if (searchString.length > 2) {
-        searchItems = items.filter(filterByName);
-        document.querySelector('.container').innerHTML = ``;
-        searchItems.forEach(function (item){
-            document.querySelector('.container').innerHTML += `
-                <div class="item" id="${item.id}" onclick="show(${item.id})">
-                    <img class="main__img" src="${item.img || './img/noimage.png'}" alt="69store__item">
-                    <h4>${item.name}</h4>
-                    <div>
-                        <p>${item.price}</p>
-                        <p>руб.</p>
+    try {
+        document.querySelector('.search').style = `background-color: none;`;
+        if (sessionStorage.last_seen) {
+            lastSeenItems = JSON.parse(sessionStorage.last_seen); 
+        }
+        event.preventDefault();
+        document.querySelector('.main__form').innerHTML = ``;
+        document.querySelector('#searchString').style = ``;
+        let searchString = document.querySelector('#searchString').value;
+        if (searchString.length > 2) {
+            searchItems = items.filter(filterByName);
+            document.querySelector('.container').innerHTML = ``;
+            searchItems.forEach(function (item){
+                document.querySelector('.container').innerHTML += `
+                    <div class="item" id="${item.id}" onclick="show(${item.id})">
+                        <img class="main__img" src="${item.img || './img/noimage.png'}" alt="69store__item">
+                        <h4>${item.name}</h4>
+                        <div>
+                            <p>${item.price}</p>
+                            <p>руб.</p>
+                        </div>
                     </div>
-                </div>
-            `; 
-        });
+                `; 
+            });
+        }
+        else {
+            document.querySelector('.search').style = `background-color: tomato;`;
+        }
+        if (!searchItems || searchItems.length === 0) {
+            document.querySelector('.container').innerHTML = `
+            <h3 class="title">
+                По вашему запросу ничего не найденно
+            </h3>
+            <img class="img" src="${customImages[11]}" alt="69store__404">
+            <button class="btn" onclick="mainList()">На главную страницу</button>
+        `;
+        }
     }
-    else {
+    catch {
         document.querySelector('.search').style = `background-color: tomato;`;
-    }
-    if (!searchItems || searchItems.length === 0) {
-        document.querySelector('.container').innerHTML = `
-        <h3 class="title">
-            По вашему запросу ничего не найденно
-        </h3>
-        <img class="img" src="${customImages[11]}" alt="69store__404">
-        <button class="btn" onclick="mainList()">На главную страницу</button>
-    `;
     }
 }
 /* Show item */
