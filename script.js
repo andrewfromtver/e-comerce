@@ -123,9 +123,9 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
         document.querySelector('.logo__right').src = customImages[7];
     });
 /* Init */
+document.cookie = "SameSite=Strict; secure";
 window.onload = function() {
     document.querySelector('#searchForm').addEventListener('submit', searchList);
-    document.cookie = "SameSite=Strict; secure";
 };
 let lastSeenItems = [];
 if (sessionStorage.last_seen) {
