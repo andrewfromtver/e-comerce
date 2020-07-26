@@ -1,7 +1,6 @@
 /* Fetch items from g-sheets */
-let itemsTest = "";
+let itemsList = "";
 let items = [];
-
 fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRFodqaGcZZ4xWcizA/1/public/full?alt=json')
     .then(function(value){
         if(value.status !== 200){
@@ -12,62 +11,62 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
     .then(function(output){
         let counter = 12;
         let row = 0;
-        itemsTest += "[{";
+        itemsList += "[{";
         for (let index = 0; index < output.feed.entry.length; index++) {
             if (output.feed.entry[index].content.$t === "id" && index < counter) {
-                itemsTest += `"${output.feed.entry[0].content.$t}"` + ":" + output.feed.entry[counter].content.$t + ", ";
+                itemsList += `"${output.feed.entry[0].content.$t}"` + ":" + output.feed.entry[counter].content.$t + ", ";
             }
             if (output.feed.entry[index - counter] && index + 12 <= output.feed.entry.length) {
                 if (output.feed.entry[index - counter].content.$t === "id") {
-                    itemsTest += `"${output.feed.entry[0].content.$t}"` + ":" + output.feed.entry[counter].content.$t + ", ";
+                    itemsList += `"${output.feed.entry[0].content.$t}"` + ":" + output.feed.entry[counter].content.$t + ", ";
                 }
             }
             if (index > counter) {
 
                 if (output.feed.entry[index - counter + row].content.$t === "prop__1") {
-                    itemsTest += `"${output.feed.entry[1].content.$t}"` + ":" + `"${output.feed.entry[1 + counter].content.$t}"` + ", ";
+                    itemsList += `"${output.feed.entry[1].content.$t}"` + ":" + `"${output.feed.entry[1 + counter].content.$t}"` + ", ";
                 }
                 if (output.feed.entry[index - counter + row].content.$t === "prop__2") {
-                    itemsTest += `"${output.feed.entry[2].content.$t}"` + ":" + `"${output.feed.entry[2 + counter].content.$t}"` + ", ";
+                    itemsList += `"${output.feed.entry[2].content.$t}"` + ":" + `"${output.feed.entry[2 + counter].content.$t}"` + ", ";
                 }
                 if (output.feed.entry[index - counter].content.$t === "add__prop") {
-                    itemsTest += `"${output.feed.entry[3].content.$t}"` + ":" + `"${output.feed.entry[3 + counter].content.$t}"` + ", ";
+                    itemsList += `"${output.feed.entry[3].content.$t}"` + ":" + `"${output.feed.entry[3 + counter].content.$t}"` + ", ";
                 }
                 if (output.feed.entry[index - counter].content.$t === "name") {
-                    itemsTest += `"${output.feed.entry[4].content.$t}"` + ":" + `"${output.feed.entry[4 + counter].content.$t}"` + ", ";
+                    itemsList += `"${output.feed.entry[4].content.$t}"` + ":" + `"${output.feed.entry[4 + counter].content.$t}"` + ", ";
                 }
                 if (output.feed.entry[index - counter].content.$t === "price") {
-                    itemsTest += `"${output.feed.entry[5].content.$t}"` + ":" + output.feed.entry[5 + counter].content.$t + ", ";
+                    itemsList += `"${output.feed.entry[5].content.$t}"` + ":" + output.feed.entry[5 + counter].content.$t + ", ";
                 }
                 if (output.feed.entry[index - counter].content.$t === "img") {
-                    itemsTest += `"${output.feed.entry[6].content.$t}"` + ":" + `"${output.feed.entry[6 + counter].content.$t}"` + ", ";
+                    itemsList += `"${output.feed.entry[6].content.$t}"` + ":" + `"${output.feed.entry[6 + counter].content.$t}"` + ", ";
                 }
                 if (output.feed.entry[index - counter].content.$t === "img__add__1") {
-                    itemsTest += `"${output.feed.entry[7].content.$t}"` + ":" + `"${output.feed.entry[7 + counter].content.$t}"` + ", ";
+                    itemsList += `"${output.feed.entry[7].content.$t}"` + ":" + `"${output.feed.entry[7 + counter].content.$t}"` + ", ";
                 }
                 if (output.feed.entry[index - counter].content.$t === "img__add__2") {
-                    itemsTest += `"${output.feed.entry[8].content.$t}"` + ":" + `"${output.feed.entry[8 + counter].content.$t}"` + ", ";
+                    itemsList += `"${output.feed.entry[8].content.$t}"` + ":" + `"${output.feed.entry[8 + counter].content.$t}"` + ", ";
                 }
                 if (output.feed.entry[index - counter].content.$t === "img__add__3") {
-                    itemsTest += `"${output.feed.entry[9].content.$t}"` + ":" + `"${output.feed.entry[9 + counter].content.$t}"` + ", ";
+                    itemsList += `"${output.feed.entry[9].content.$t}"` + ":" + `"${output.feed.entry[9 + counter].content.$t}"` + ", ";
                 }
                 if (output.feed.entry[index - counter].content.$t === "top") {
-                    itemsTest += `"${output.feed.entry[10].content.$t}"` + ":" + output.feed.entry[10 + counter].content.$t + ", ";
+                    itemsList += `"${output.feed.entry[10].content.$t}"` + ":" + output.feed.entry[10 + counter].content.$t + ", ";
                 }
                 if (output.feed.entry[index - counter].content.$t === "description") {
-                    itemsTest += `"${output.feed.entry[11].content.$t}"` + ":" + `"${output.feed.entry[11 + counter].content.$t}"`;
+                    itemsList += `"${output.feed.entry[11].content.$t}"` + ":" + `"${output.feed.entry[11 + counter].content.$t}"`;
                 }
                 if (output.feed.entry[index - counter].content.$t === "description" && index + 1 < output.feed.entry.length) {
-                    itemsTest += "}, {";
+                    itemsList += "}, {";
                     counter += 12;
                 }
             }
             if (index + 1 === output.feed.entry.length) {
-                itemsTest += "}";
+                itemsList += "}";
             }
         }
-        itemsTest += "]";
-        items = JSON.parse(itemsTest);
+        itemsList += "]";
+        items = JSON.parse(itemsList);
         itemsListLoaded = true;
         mainList();
     });
@@ -102,6 +101,25 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
         });
         select2loaded = true;
         mainList();
+    });
+/* Fetch custom_images from g-sheets */
+let customImages = [];
+fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRFodqaGcZZ4xWcizA/4/public/full?alt=json')
+    .then(function(value){
+        if(value.status !== 200){
+            return Promise.reject(new Error('Ошибка'));
+        }
+            return value.json();
+    })
+    .then(function(output){
+        output.feed.entry.forEach(function(item) {
+            customImages.push(item.content.$t);
+        });
+        customImagesLoaded = true;
+        mainList();
+        document.querySelector('.logo__left').src = customImages[3];
+        document.querySelector('.search').src = customImages[5];
+        document.querySelector('.logo__right').src = customImages[7];
     });
 /* Init */
 window.onload = function() {
@@ -192,7 +210,7 @@ function filterByPrice(item) {
     return !!(isNumber(item.price) && item.price > priceFrom && item.price < priceTo);
 }
 function filterByName(item) {
-    let searchString = document.querySelector('#search').value;
+    let searchString = document.querySelector('#searchString').value;
     let re = new RegExp('.*' + searchString.toLowerCase() + '.*');
     return !!item.name.toLowerCase().match(re);
 }
@@ -256,7 +274,7 @@ function mainListFiltered() {
         <h3 class="title">
             По вашему запросу ничего не найденно
         </h3>
-        <img class="img" src="./img/404.gif" alt="69store__404">
+        <img class="img" src="${customImages[11]}" alt="69store__404">
         <button class="btn" onclick="mainList()">На главную страницу</button>
     `;
     }
@@ -272,7 +290,7 @@ function clearFilters() {
         <h3 class="title">
             Выберите тип, пол, ценовой диапазон и нажмите кнопку "Найти"
         </h3>
-        <img class="img" src="./img/404.gif" alt="69store__404">
+        <img class="img" src="${customImages[11]}" alt="69store__404">
         <button class="btn" onclick="mainList()">На главную страницу</button>
     `;
 }
@@ -296,16 +314,17 @@ function topList() {
     });
 }
 /* Search items by name */
+let searchItems = [];
 function searchList() {
     if (sessionStorage.last_seen) {
         lastSeenItems = JSON.parse(sessionStorage.last_seen); 
     }
     event.preventDefault();
     document.querySelector('.main__form').innerHTML = ``;
-    document.querySelector('#search').style = ``;
-    let searchString = document.querySelector('#search').value;
-    if (searchString.length > 3) {
-        let searchItems = items.filter(filterByName);
+    document.querySelector('#searchString').style = ``;
+    let searchString = document.querySelector('#searchString').value;
+    if (searchString.length > 2) {
+        searchItems = items.filter(filterByName);
         document.querySelector('.container').innerHTML = ``;
         searchItems.forEach(function (item){
             document.querySelector('.container').innerHTML += `
@@ -321,14 +340,14 @@ function searchList() {
         });
     }
     else {
-        document.querySelector('#search').style = `border-color: tomato;`;
+        document.querySelector('#searchString').style = `color: tomato;`;
     }
     if (!searchItems || searchItems.length === 0) {
         document.querySelector('.container').innerHTML = `
         <h3 class="title">
             По вашему запросу ничего не найденно
         </h3>
-        <img class="img" src="./img/404.gif" alt="69store__404">
+        <img class="img" src="${customImages[11]}" alt="69store__404">
         <button class="btn" onclick="mainList()">На главную страницу</button>
     `;
     }
@@ -341,10 +360,9 @@ function show(id) {
     }
     function filterById(item) {
         return !!(isNumber(item.id) && item.id === id);
-
     }
     let shownItem = items.filter(filterById);
-    
+    let addItemImage = customImages[9];
     document.querySelector('.container').innerHTML = `
         <div class="item">
             <img class="main__img" onclick="view(this)" src="${shownItem[0].img || './img/noimage.png'}" alt="69store__item">
@@ -358,7 +376,7 @@ function show(id) {
         <button class="btn__back" onclick="mainList()"><</button>
         <div class="item__card">
             <div class="cart item__cart" id="${id}" onclick="addToCart(this.id)">
-                <img src="./img/add_to_cart.png" alt="69store__add__to__cart" height="28px" width="28px">
+                <img src="${addItemImage}" alt="add__item" height="28px" width="28px">
             </div>
             <p class="item__info">
                 ${select1.slice(select1.indexOf(shownItem[0].prop__1)-1, select1.indexOf(shownItem[0].prop__1))} 
@@ -427,7 +445,7 @@ function cart() {
         <h3 class="title">
             Ваша корзина пока пуста, выберите что-нибудь и возвращайтесь
         </h3>
-        <img class="img" src="./img/404.gif" alt="69store__404">
+        <img class="img" src="${customImages[11]}" alt="69store__404">
         <button class="btn" onclick="mainList()">Назад к покупкам</button>
         `;
     } else {
@@ -463,7 +481,7 @@ function addToCart(id) {
                 ${cartItem[0].name}
             </h3>
             <p class="sizes__title">
-                Выберите размер:
+                Уточните заказ:
             </p>
             <div class="sizes__table">
         `;
