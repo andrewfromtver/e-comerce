@@ -95,7 +95,7 @@ button:active {
 }
 .navsearch > form > input:focus {
     outline: none;
-    border: none;
+    border-color: none;
 }
 .navsearch > form > img {
     position: absolute;
