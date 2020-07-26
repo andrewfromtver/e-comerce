@@ -123,8 +123,8 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
         document.querySelector('.logo__right').src = customImages[7];
     });
 /* Init */
+document.cookie = "SameSite=Strict; secure";
 window.onload = function() {
-    document.cookie = "SameSite=Strict; secure";
     document.querySelector('#searchForm').addEventListener('submit', searchList);
 };
 let lastSeenItems = [];
