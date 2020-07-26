@@ -316,6 +316,7 @@ function topList() {
 /* Search items by name */
 let searchItems = [];
 function searchList() {
+    document.querySelector('.search').style = `background-color: none;`;
     if (sessionStorage.last_seen) {
         lastSeenItems = JSON.parse(sessionStorage.last_seen); 
     }
@@ -340,7 +341,7 @@ function searchList() {
         });
     }
     else {
-        document.querySelector('#searchString').style = `border-color: tomato;`;
+        document.querySelector('.search').style = `background-color: tomato;`;
     }
     if (!searchItems || searchItems.length === 0) {
         document.querySelector('.container').innerHTML = `
