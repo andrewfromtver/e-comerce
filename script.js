@@ -123,7 +123,7 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
     });
 /* Init */
 window.onload = function() {
-    document.body.style = `background-image: url(.customImages[1])`;
+    document.body.style = `background-image: url(.${customImages[1]})`;
     document.querySelector('#searchForm').addEventListener('submit', searchList);
 };
 let lastSeenItems = [];
