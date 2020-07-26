@@ -37,7 +37,7 @@ button:active {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    box-shadow:0 5px 5px #333;
+    box-shadow:0 2px 2px #333;
 }
 .logo, .cart, .search {
     margin: 0 5vw;
