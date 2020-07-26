@@ -117,7 +117,7 @@ fetch('https://spreadsheets.google.com/feeds/cells/1AbCjehdSl4Su8RXm-GILIisymiRF
         });
         customImagesLoaded = true;
         mainList();
-        document.body.style = `background-image: url(.${customImages[1]})`;
+        document.body.style = `background-image: url(${customImages[1]})`;
         document.querySelector('.logo__left').src = customImages[3];
         document.querySelector('.search').src = customImages[5];
         document.querySelector('.logo__right').src = customImages[7];
