@@ -340,7 +340,7 @@ function searchList() {
         });
     }
     else {
-        document.querySelector('#searchString').style = `color: tomato;`;
+        document.querySelector('#searchString').style = `border-color: tomato;`;
     }
     if (!searchItems || searchItems.length === 0) {
         document.querySelector('.container').innerHTML = `
