@@ -62,8 +62,8 @@ button:active {
 }
 .link {
     text-align: center;
-    width: 133px;
-    margin-right: 34px;
+    width: 143px;
+    margin-right: 14px;
     padding: 9px 0 0 0;
     font-size: 14px;
     background-color: #555555;
@@ -127,28 +127,30 @@ button:active {
     display: flex;
     flex-direction: row;
     padding-top: 35px;
-    max-width: 963px;
+    max-width: 930px;
     margin: 0 auto;
 }
 .select1, .select2 {
-    margin: 16px;
     height: 35px;
-    width: 14.25%;
+    width: 143px;
     padding: 0;
+    margin: 16px 14px 16px 1px;
 }
-.price__filter, .search__clear {
-    width: 30%;
-    margin: 16px;
+.search__clear {
+    width: 306px;
+    margin: 16px 1px 0 0;
     height: 35px;
     padding: 0;
+    display: flex;
+    justify-content: space-between;
 }
 .price__filter > input {
-    width: 47%;
+    width: 122px;
     height: 35px;
 }
 .search__clear > button {
     height: 100%;
-    width: 49%;
+    width: 144px;
 }
 .container, .last__seen {
     width: 95vw;
