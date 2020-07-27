@@ -477,6 +477,7 @@ function cart() {
         cartTable +=`
             </table>
             <button class="btn" onclick="clearCart()">Отчистить корзину</button>
+            <button class="btn" onclick="pay()">Оплатить</button>
         `;
         document.querySelector('.container').innerHTML = cartTable;
     }
