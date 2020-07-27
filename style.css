@@ -62,7 +62,7 @@ button:active {
 }
 .link {
     text-align: center;
-    width: 137px;
+    width: 133px;
     margin-right: 34px;
     padding: 9px 0 0 0;
     font-size: 14px;
@@ -78,7 +78,7 @@ button:active {
     padding: 10px 0 0 0;
 }
 .navsearch {
-    width: 278px;
+    width: 306px;
 
 }
 ::placeholder {
