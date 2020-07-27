@@ -169,7 +169,7 @@ button:active {
     flex-wrap: wrap;
 }
 .last__seen {
-    margin-top: 25px;
+    margin-top: 16px;
     overflow-x: auto;
     flex-wrap: nowrap;
 }
