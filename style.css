@@ -144,6 +144,11 @@ button:active {
     display: flex;
     justify-content: space-between;
 }
+.price__filter {
+    margin: 16px 0 16px 19px;
+    width: 294px;
+    color: #ccc;
+}
 .price__filter > input {
     width: 122px;
     height: 35px;
