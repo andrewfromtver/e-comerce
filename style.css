@@ -21,6 +21,7 @@ body {
 }
 input, select, button {
     box-shadow: 2px 2px 2px #333;
+    background-color: #ccc;
 }
 select:active, button:active {
     box-shadow: none;
