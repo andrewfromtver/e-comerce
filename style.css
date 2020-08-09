@@ -494,3 +494,26 @@ input:focus, select:focus, button:focus {
     padding-top: 20px;
     color: #333;
 }
+
+.pag, .pag__curent {
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-left: 10px;
+    border: 1px solid #333;
+    box-shadow:0 2px 2px #333;
+}
+.pag:active {
+    height: 15px;
+    width: 15px;
+    margin: 12.5px;
+    padding-top: 0;
+    opacity: 0.75;
+}
+.pag__curent {
+    opacity: 0.5;
+}
