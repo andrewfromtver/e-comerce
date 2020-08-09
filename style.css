@@ -69,6 +69,7 @@ input:focus, select:focus, button:focus {
     border: 2px solid tomato;
     border-radius: 10px;
     cursor: pointer;
+    background-color: #fff;
 }
 .filter__link > img:active {
     height: 24px;
