@@ -38,7 +38,9 @@
             start = end - 9;
             itemsCut = items.slice(start, end);
             document.querySelector('.pagination').innerHTML = `
-                123...
+                <div class="pag__curent">1</div>
+                <div class="pag" onclick="mainList(2)">2</div>
+                <div class="pag" onclick="mainList(3)">3</div>
             `;
         }
         else if (items.length === 0) {
@@ -78,7 +80,9 @@
             start = end - 9;
             itemsCut = items.slice(start, end);
             document.querySelector('.pagination').innerHTML = `
-                123...
+                <div class="pag__curent">1</div>
+                <div class="pag" onclick="topList(2)">2</div>
+                <div class="pag" onclick="topList(3)">3</div>
             `;
         }
         else if (items.length === 0) {
@@ -141,7 +145,9 @@
             start = end - 9;
             filteredItemsCut = filteredItems.slice(start, end);
             document.querySelector('.pagination').innerHTML = `
-                123...
+                <div class="pag__curent">1</div>
+                <div class="pag" mainListFiltered="mainList(2)">2</div>
+                <div class="pag" mainListFiltered="mainList(3)">3</div>
             `;
         }
         else {
@@ -189,7 +195,9 @@
                     start = end - 9;
                     searchItemsCut = searchItems.slice(start, end);
                     document.querySelector('.pagination').innerHTML = `
-                        123...
+                        <div class="pag__curent">1</div>
+                        <div class="pag" searchList="mainList(2)">2</div>
+                        <div class="pag" searchList="mainList(3)">3</div>
                     `;
                 }
                 else if (searchItems.length === 0) {
