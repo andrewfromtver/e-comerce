@@ -63,6 +63,7 @@ input:focus, select:focus, button:focus {
     margin-top: 2px;
     border: 2px solid tomato;
     border-radius: 10px;
+    background-color: #fff;
 }
 .filter__link > img {
     margin-top: 2px;
@@ -146,6 +147,7 @@ input:focus, select:focus, button:focus {
     margin-top: 2px;
     border: 2px solid tomato;
     border-radius: 10px;
+    background-color: #fff;
 }
 .cart > img:active {
     height: 24px;
