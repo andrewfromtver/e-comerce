@@ -314,6 +314,7 @@ input:focus, select:focus, button:focus {
     height: 30%;
 }
 .img__set > img {
+    object-fit: contain;
     height: 100%;
     width: 33%;
     border: 1px solid #777;
