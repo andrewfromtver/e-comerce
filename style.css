@@ -302,8 +302,7 @@ input:focus, select:focus, button:focus {
     box-shadow: none;
 }
 .main__img {
-    height: 70%;
-    width: 100%;
+    object-fit: contain;
     border-radius: 5px;
 }
 .img__set {
