@@ -32,7 +32,7 @@ input:focus, select:focus, button:focus {
 }
 .small__screen {
     width: 50%;
-    margin: 40vh auto;
+    margin: 40vh auto 0 auto;
     color: #333;
     background-color: #fff;
     padding: 25px;
